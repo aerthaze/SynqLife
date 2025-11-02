@@ -11,4 +11,8 @@ SynqLife adalah aplikasi berbasis Python yang memantau dan menganalisis kesehata
 - 🍽️ Nutrition Tracker	Hitung kalori dan kandungan gizi dari makanan	Nutritionix API
 -  💬 Motivation Quotes	Tampilkan kutipan motivasi kesehatan harian	API Ninjas Quotes API
 
-
+# 🛠️ Library yang Digunakan
+- requests
+- json
+- datetime
+- matplotlib 
