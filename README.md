@@ -15,4 +15,5 @@ SynqLife adalah aplikasi berbasis Python yang memantau dan menganalisis kesehata
 - requests
 - json
 - datetime
-- matplotlib 
+- matplotlib
+- locale
