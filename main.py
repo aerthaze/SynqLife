@@ -1,7 +1,6 @@
 import json
 import os
 from modules import food,kesimpulan,minum,tidur 
-from utility import clear_screen, pause
 import storage
 
 daily_data = storage.load_data()
@@ -20,10 +19,9 @@ def main_menu():
     print("[0] 🚪  Keluar")
     print("==========================================")
     while True: 
-        choice = input("Enter your choice (1-5): ").strip()
+        choice = input("Enter your choice (1-4): ").strip()
         
         if choice == "1":
-            clear_screen()
             print("\nMentracking Durasi Tidur🌙 ...")
             start = input("Waktu mulai tidur (HH:MM): ")
             end = input("Waktu bangun (HH:MM): ")
@@ -33,10 +31,9 @@ def main_menu():
             daily_data["durasi_tidur"] = hasil  
             storage.save_data(daily_data)          
             print("Data tidur berhasil disimpan.")
-            pause()
+            input("\nTekan Enter untuk kembali ke menu utama...")
 
         elif choice == "2":
-            clear_screen()
             print("\nMengkalkulasi Asupan Air💧...")
             kota=input("Masukkan nama kota untuk cek cuaca: ")
             hidrasi=minum.hidrasi_harian(kota)  
@@ -45,10 +42,9 @@ def main_menu():
             daily_data["rekomendasi_hidrasi"] = hidrasi
             storage.save_data(daily_data)   
             print("Data hidrasi berhasil disimpan.")
-            pause()
+            input("\nTekan Enter untuk kembali ke menu utama...")
 
         elif choice == "3":
-            clear_screen()
             print("\nMenganalisis Nutrisi dari Makanan...")
             makanan=input("Masukkan nama makanan: ")
             analisis= food.get_nutrition(makanan)  
@@ -60,20 +56,20 @@ def main_menu():
             daily_data["lemak"] += analisis['lemak']
             storage.save_data(daily_data)
             print("Data nutrisi berhasil disimpan.")
-            pause()
+            input("\nTekan Enter untuk kembali ke menu utama...")
 
         elif choice == "4":
             print("==========================================")
             print("\n📊 Ringkasan Data Kesehatan Harian Anda:")
             print("==========================================")
             kesimpulan.show_summary()
-            pause()
+            input("\nTekan Enter untuk kembali ke menu utama...")
 
         elif choice == "0":
             print("Terima kasih sudah menggunakan SynqLife! Stay healthy! 👋")
             break
         else:
             print("Pilihan invalid. Silahkan pilih 1-4.\n")
-# Run the menu
+
 if __name__ == "__main__":
     main_menu()
