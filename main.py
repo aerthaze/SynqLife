@@ -1,6 +1,6 @@
 import json
 import os
-from modules import food,kalori,kesimpulan,minum,motivasi,tidur 
+from modules import food,kesimpulan,minum,tidur 
 from utility import clear_screen, pause
 import storage
 
@@ -14,10 +14,9 @@ def main_menu():
     print("------------------------------------------")
     print("[1] 🌙  Catat Durasi Tidur")
     print("[2] 💧  Cek Kebutuhan Hidrasi (Cuaca)")
-    print("[3] 💪  Catat Aktivitas (Kalori Terbakar)")
-    print("[4] 🍎  Catat Makanan (Kalori Masuk)")
+    print("[3] 🍎  Catat Makanan (Kalori Masuk)")
     print("------------------------------------------")
-    print("[5] 📊  Tampilkan Ringkasan Harian")
+    print("[4] 📊  Tampilkan Ringkasan Harian")
     print("[0] 🚪  Keluar")
     print("==========================================")
     while True: 
@@ -50,48 +49,31 @@ def main_menu():
 
         elif choice == "3":
             clear_screen()
-            print("\nMengestimasi Kalori yang Terbakar💪 ...")
-            aktivitas=input("Masukkan jenis aktivitas (misal: lari, bersepeda): ")
-            durasi=int(input("Masukkan durasi aktivitas (menit): "))
-            kalori= kalori.kalori_terbakar(aktivitas, durasi)
-            print(f"\n✅ Kalori terbakar tercatat: {kalori} kkal")
-
-            daily_data["kalori_keluar"] += kalori
-            storage.save_data(daily_data)
-            print("Data kalori terbakar berhasil disimpan.")
-            pause()
-
-        elif choice == "4":
-            clear_screen()
             print("\nMenganalisis Nutrisi dari Makanan...")
             makanan=input("Masukkan nama makanan: ")
-            analisis= food.analisis_makanan(makanan)  
-            print(f"\n✅ Nutrisi tercatat: {makanan['kalori']} kkal")
+            analisis= food.get_nutrition(makanan)  
+            print(f"\n✅ Nutrisi tercatat: {analisis['kalori']} kkal")
             
-            daily_data["kalori_masuk"] += makanan['kalori']
-            daily_data["protein"] += makanan['protein']
-            daily_data["karbohidrat"] += makanan['karbohidrat']
-            daily_data["lemak"] += makanan['lemak']
+            daily_data["kalori_masuk"] +=analisis['kalori']
+            daily_data["protein"] += analisis['protein']
+            daily_data["karbohidrat"] += analisis['karbohidrat']
+            daily_data["lemak"] += analisis['lemak']
             storage.save_data(daily_data)
             print("Data nutrisi berhasil disimpan.")
             pause()
 
-        elif choice == "5":
-            print("\n Menulis Daily Motivation Quote Kesehatan...")
-            clear_screen()
+        elif choice == "4":
             print("==========================================")
             print("\n📊 Ringkasan Data Kesehatan Harian Anda:")
             print("==========================================")
-            kalori_data = [daily_data["calories_in"], daily_data["calories_out"]]
-            makro_data = [daily_data["protein"], daily_data["carbs"], daily_data["fat"]]
-            kesimpulan.show_summary(kalori_data, makro_data)
+            kesimpulan.show_summary()
             pause()
 
         elif choice == "0":
             print("Terima kasih sudah menggunakan SynqLife! Stay healthy! 👋")
             break
         else:
-            print("Pilihan invalid. Silahkan pilih 1-6.\n")
+            print("Pilihan invalid. Silahkan pilih 1-4.\n")
 # Run the menu
 if __name__ == "__main__":
     main_menu()

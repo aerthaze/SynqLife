@@ -38,10 +38,10 @@ def get_nutrition(query):
                 print("(Catatan: Data berikut adalah perkiraan per 100g)")
 
                 return {
-                    "kalori": float(calories),
+                    "kalori": float(kalori),
                     "protein": float(protein),
-                    "karbohidrat": float(carbs),
-                    "lemak": float(fat)
+                    "karbohidrat": float(karbohidrat),
+                    "lemak": float(lemak)
                 }
             else:
                 print(f"Tidak ada produk yang ditemukan untuk '{query}' di database Indonesia.")

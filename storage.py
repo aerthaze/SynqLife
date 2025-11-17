@@ -3,9 +3,7 @@ import json
 daily_data = {
     "durasi_tidur": "Belum dicatat",
     "rekomendasi_hidrasi": "Belum dicek",
-    "quote_motivasi": "Belum dilihat",
     "kalori_masuk": 0,
-    "kalori_keluar": 0,
     "protein": 0,
     "karbohidrat": 0,
     "lemak": 0
